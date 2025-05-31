@@ -1,0 +1,13 @@
+[workspace]
+authors = ["kalin chakma <chakma.kalin10211@gmail.com>"]
+channels = ["https://conda.modular.com/max-nightly", "conda-forge"]
+name = "nnfs"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+numpy = ">=2.2.6,<3"
+pandas = ">=2.2.3,<3"
+modular = ">=25.4.0.dev2025053005,<26"
