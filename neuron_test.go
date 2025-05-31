@@ -1,4 +1,4 @@
-package main
+package nnfs
 
 import (
 	"slices"
@@ -30,7 +30,7 @@ func Test_neuron(t *testing.T) {
 	}
 
 	// Test Inputs method
-	expectedInputs := []float64{1, 1, 3}
+	expectedInputs := []float64{1, 2, 3}
 	if !slices.Equal(neuron.Inputs(), expectedInputs) {
 		t.Errorf("Expected inputs %v, got %v", expectedInputs, neuron.Inputs())
 	} else {
@@ -56,5 +56,19 @@ func Test_neuron(t *testing.T) {
 		t.Errorf("Expected output %f, got %f", expectedOutput, testNeuron.Output())
 	} else {
 		t.Logf("Calculated test pass: %f", testNeuron.Output())
+	}
+}
+
+func Test_neuron_layer(t *testing.T) {
+	// Create a mock neuron layer
+	layer := []Neuron{
+		&NeuronImpl{inputs: []float64{1, 2}, weights: []float64{0.5, -0.5}, bias: 1},
+		&NeuronImpl{inputs: []float64{3, 4}, weights: []float64{0.2, 0.8}, bias: -1},
+	}
+
+	// Test each neuron in the layer
+	for i, neuron := range layer {
+		expectedOutput := neuron.Output()
+		t.Logf("Neuron %d output: %f", i, expectedOutput)
 	}
 }

@@ -1,4 +1,4 @@
-package main
+package nnfs
 
 type Neuron interface {
 	Inputs() []float64
@@ -32,4 +32,9 @@ func (n *NeuronImpl) Output() float64 {
 		sum += input * n.weights[i]
 	}
 	return sum + n.bias
+}
+
+func (n *NeuronImpl) ActivationFunction(input float64) float64 {
+	// For simplicity, using a linear activation function
+	return input
 }
