@@ -1,4 +1,5 @@
 
+@value
 struct Neuron:
     var weights: List[Float32]
     var bias: Float32

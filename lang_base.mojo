@@ -58,4 +58,3 @@ fn main():
         gp()
     except Exception:
         print("Error in GPU context:", Exception)
-
