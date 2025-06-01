@@ -18,6 +18,6 @@ struct Neuron:
     fn dump(self):
         print("Bias",self.bias)
         print("Weights: ", end='')
-        for w in range(len(self.weights)):
-            print(self.weights[w], end=' ')
+        for w in self.weights:
+            print(w[], end=' ') # [] is dereferencing operator
         print()
