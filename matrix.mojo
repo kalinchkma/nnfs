@@ -45,8 +45,14 @@ struct Matrix:
     fn __eq__(read self, other: Self) -> Bool:
         if self.height != other.height or self.width != other.width:
             return False
-        for i in range(self.length):
-            if self.data.load(i) != other.data.load(i):
-                return False
+        for i in range(self.height):
+            for j in range(self.width):
+                var selfValue: Float32 = self[i, j]
+                var otherValue: Float32 = other[i, j]
+                if selfValue < otherValue or selfValue > otherValue:
+                    return False
         return True
+    
+    fn __ne__(read self, other: Self) -> Bool:
+        return not self.__eq__(other)
 
