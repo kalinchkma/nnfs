@@ -54,5 +54,94 @@ struct Matrix:
         return True
     
     fn __ne__(read self, other: Self) -> Bool:
-        return not self.__eq__(other)
+        return not self == other
 
+    fn __add__(read self, other: Self) -> Self:
+        # Mat1 + Mat2
+        if self.width != other.width or self.height != other.height:
+            print("Error: Matrix dimensions do not match for addition")
+            return Matrix(Float32(0.0), self.height, self.width)
+        var newMatrix = Matrix(Float32(0.0), self.height, self.width)
+        for i in range(self.height):
+            for j in range(self.width):
+                newMatrix[i, j] = self[i, j] + other[i, j]
+        return newMatrix
+    
+    fn __sub__(read self, other: Self) -> Self:
+        # Mat1 - Mat2
+        if self.width != other.width or self.height != other.height:
+            print("Error: Matrix dimensions do not match for addition")
+            return Matrix(Float32(0.0), self.height, self.width)
+        var newMatrix = Matrix(Float32(0.0), self.height, self.width)
+        for i in range(self.height):
+            for j in range(self.width):
+                newMatrix[i, j] = self[i, j] - other[i, j]
+        return newMatrix
+    
+    fn __mul__(read self, other: Self) -> Self:
+        if self.width != other.height:
+            print("Error: Matrix dimensions do not match for multiplication")
+            return Matrix(Float32(0.0), self.height, other.width)
+        var newMatrix = Matrix(Float32(0.0), self.height, other.width)
+        for i in range(self.height):
+            for j in range(other.width):
+                for k in range(self.width):
+                    newMatrix[i, j] += self[i, k] * other[k, j]
+        return newMatrix
+    
+    fn __truediv__(read self, other: Self) -> Self:
+        if self.width != other.width or self.height != other.height:
+            print("Error: Matrix dimensions do not match for addition")
+            return Matrix(Float32(0.0), self.height, self.width)
+        var newMatrix = Matrix(Float32(0.0), self.height, self.width)
+        for i in range(self.height):
+            for j in range(self.width):
+                newMatrix[i, j] = self[i, j] / other[i, j]
+        return newMatrix
+    
+    fn __add__(read self, scalar: Float32) -> Self:
+        var newMatrix = Matrix(Float32(0.0), self.height, self.width)
+        for i in range(self.height):
+            for j in range(self.width):
+                newMatrix[i, j] = self[i, j] + scalar
+        return newMatrix
+    
+    fn __sub__(read self, scalar: Float32) -> Self:
+        var newMatrix = Matrix(Float32(0.0), self.height, self.width)
+        for i in range(self.height):
+            for j in range(self.width):
+                newMatrix[i, j] = self[i, j] - scalar
+        return newMatrix
+    
+    fn __mul__(read self, scalar: Float32) -> Self:
+        var newMatrix = Matrix(Float32(0.0), self.height, self.width)
+        for i in range(self.height):
+            for j in range(self.width):
+                newMatrix[i, j] = self[i, j] * scalar
+        return newMatrix
+    
+    fn __truediv__(read self, scalar: Float32) -> Self:
+        var newMatrix = Matrix(Float32(0.0), self.height, self.width)
+        for i in range(self.height):
+            for j in range(self.width):
+                newMatrix[i, j] = self[i, j] / scalar
+        return newMatrix
+    
+    fn apply_function[func: fn(Float32) -> Float32](read self) -> Self:
+        var newMatrix = Matrix(Float32(0.0), self.height, self.width)
+        for i in range(self.height):
+            for j in range(self.width):
+                newMatrix[i, j] = func(self[i, j])
+        return newMatrix
+    
+    fn print_all(read self) -> None:
+        print("[")
+        for i in range(self.height):
+            print("\t[", end="")
+            for j in range(self.width):
+                print(self[i, j], end="")
+                if j != self.width - 1:
+                    print(", ", end="")
+            print("]," if i != self.height - 1 else "]")
+        print("]")
+        
