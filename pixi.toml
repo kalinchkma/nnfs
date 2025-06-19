@@ -2,7 +2,7 @@
 authors = ["kalin chakma <chakma.kalin10211@gmail.com>"]
 channels = ["https://conda.modular.com/max-nightly", "conda-forge"]
 name = "nnfs"
-platforms = ["linux-64"]
+platforms = ["osx-arm64"]
 version = "0.1.0"
 
 [tasks]
